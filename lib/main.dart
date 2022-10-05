@@ -4,8 +4,16 @@ void main() => runApp(MaterialApp(
   home: UserPanel(),
 ));
 
-class UserPanel extends StatelessWidget {
+class UserPanel extends StatefulWidget {
   const UserPanel({Key? key}) : super(key: key);
+
+  @override
+  State<UserPanel> createState() => _UserPanelState();
+}
+
+class _UserPanelState extends State<UserPanel> {
+
+  int _count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +37,65 @@ class UserPanel extends StatelessWidget {
                   fontFamily: 'SanFrancisco',
                 ),),
 
-                Padding(padding: EdgeInsets.only(top: 20)),
+                Padding(padding: EdgeInsets.only(top: 15)),
                 Image(
                     image: AssetImage('assets/bajaj.png'),
                     width: 150,
               ),
                 Row(
+
                   children: [
-                    Icon(Icons.)
+                    Padding(padding: EdgeInsets.only(top: 70)),
+
+                    Icon(Icons.account_balance_wallet_rounded, color: Colors.white,),
+                    Text('Rent $_count moto', style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontFamily: 'SanFrancisco',
+                    ),)
                   ],
-                )
+                ),
+                Row(
+                  children: [
+                    ElevatedButton(onPressed: () {setState(() {
+                      if (_count > 0) {
+                        _count--;
+                      }
+                    });}, child: Icon(Icons.exposure_minus_1), style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(
+                        fontFamily: 'SanFrancisco',
+                        fontSize: 17,
+                      ),
+                      primary: Color(0x6f2c0264),
+                    ) ,
+                    ),
+                    ElevatedButton(onPressed: () {setState(() {
+                      _count++;
+                    });}, child: Icon(Icons.plus_one), style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(
+                        fontFamily: 'SanFrancisco',
+                        fontSize: 17,
+                      ),
+                      primary: Color(0x6f2c0264),
+                    ) ,
+                    ),
+                    ElevatedButton(onPressed: () {setState(() {
+                      _count = 0;
+                    });}, child: Text('Take Moto'), style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(
+                        fontFamily: 'SanFrancisco',
+                        fontSize: 17,
+                      ),
+                      primary: Color(0x6f2c0264),
+                    ) ,
+                    )
+                  ],
+                ),
             ],
           ),
           ]
         ),
       ),
-
     );
   }
 }
